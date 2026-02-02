@@ -1,25 +1,6 @@
-import gspread
-from google.oauth2.service_account import Credentials
 import streamlit as st
-import datetime
 from pathlib import Path
 import pandas as pd
-user = st.user
-
-if user.is_logged_in:
-    creds = Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=["https://www.googleapis.com/auth/spreadsheets"]
-    )
-
-    client = gspread.authorize(creds)
-    sheet = client.open("analytics_streamlit").sheet1
-
-    sheet.append_row([
-        str(datetime.datetime.now()),
-        user.email,
-        user.name
-    ])
 
 st.set_page_config(page_title="Arsip PDF GPP", layout="wide")
 
